@@ -1,10 +1,26 @@
-import type { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
-import type { User } from "../Employee";
+import type { IEmployeeRepository } from "@/domain/repositories/employee-repository";
+import type { Employee } from "../Employee";
 
-export class CreateUserUseCase {
-	constructor(private readonly userRepository: UsersRepository) {}
+export class CreateEmployeeUseCase {
+	constructor(private readonly employeeRepository: IEmployeeRepository) {}
 
-	async execute(user: User): Promise<User> {
-		return this.userRepository.create(user);
+	async execute(employee: {
+		firstName: string;
+		lastName: string;
+		hireDate: Date;
+		phone: string;
+		address: string;
+		status: boolean;
+		departmentId: string;
+	}): Promise<{
+		firstName: string;
+		lastName: string;
+		hireDate: Date;
+		phone: string;
+		address: string;
+		status: boolean;
+		departmentId: string;
+	}> {
+		return this.employeeRepository.create(employee);
 	}
 }

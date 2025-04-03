@@ -1,11 +1,9 @@
-import { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
-import { FindUserUseCase } from "../use-cases/find-employee-use-case";
-import { FindUserController } from "../controller/find-employee-controller";
+import { EmployeeRepository } from "@/domain/repositories/implementation/employee-prisma-implementation";
+import { FindEmployeeUseCase } from "../use-cases/find-employee-use-case";
+import { FindEmployeeController } from "../controller/find-employee-controller";
 
-const usersRepository = new UsersRepository();
+const employeeRepository = new EmployeeRepository();
+const findEmployeeUseCase = new FindEmployeeUseCase(employeeRepository);
+const findEmployeeController = new FindEmployeeController(findEmployeeUseCase);
 
-const findUserUseCase = new FindUserUseCase(usersRepository);
-
-const findUserController = new FindUserController(findUserUseCase);
-
-export { findUserController };
+export { findEmployeeController };

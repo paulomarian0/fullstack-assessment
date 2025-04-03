@@ -9,37 +9,38 @@ export class EmployeeRepository implements IEmployeeRepository {
 		this.repository = databaseAdapter;
 	}
 
-	async create(user: Employee) {
+	async create({
+		firstName,
+		lastName,
+		hireDate,
+		phone,
+		address,
+		status,
+		departmentId,
+	}: Employee) {
 		return this.repository.employee.create({
 			data: {
-				email: user.email,
-				name: user.name,
+				firstName,
+				lastName,
+				hireDate,
+				phone,
+				address,
+				status,
+				departmentId,
 			},
 		});
 	}
 
-	async list(email: string) {
-		const users = await this.repository.employee.findMany({
-			where: {
-				email: email ? { contains: email } : undefined,
-				deletedAt: null,
-			},
-		});
+	async list() {
+		const departments = await this.repository.employee.findMany({});
 
-		return users;
+		return departments;
 	}
 
-	async find({
-		id,
-		name,
-		email,
-	}: { id?: string; name?: string; email?: string }) {
+	async find({ id }: { id?: string }) {
 		const user = await this.repository.employee.findFirst({
 			where: {
 				id,
-				name,
-				email,
-				deletedAt: null,
 			},
 		});
 
@@ -47,23 +48,27 @@ export class EmployeeRepository implements IEmployeeRepository {
 	}
 
 	async delete({ id }: { id: string }) {
-		return this.repository.employee.update({
+		await this.repository.employee.delete({
 			where: {
 				id,
-			},
-			data: {
-				deletedAt: new Date(),
 			},
 		});
 	}
 
-	async update({ id, name }: { id: string; name: string }) {
-		return this.repository.employee.update({
+	async update({
+		id,
+		phone,
+		address,
+		status,
+	}: { id: string; phone: string; address: string; status: boolean }) {
+		await this.repository.employee.update({
 			where: {
 				id,
 			},
 			data: {
-				name,
+				phone,
+				address,
+				status,
 			},
 		});
 	}

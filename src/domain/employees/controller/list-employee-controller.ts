@@ -1,16 +1,14 @@
-import type { ListUserUseCase } from "../use-cases/list-employee-use-case";
+import type { ListEmployeeUseCase } from "../use-cases/list-employee-use-case";
 import { type NextRequest, NextResponse } from "next/server";
 
-export class ListUserController {
-	constructor(private readonly listUserUseCase: ListUserUseCase) {}
+export class ListEmployeeController {
+	constructor(private readonly listEmployeeUseCase: ListEmployeeUseCase) {}
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
-			const { email } = Object.fromEntries(request.nextUrl.searchParams);
+			const employees = await this.listEmployeeUseCase.execute();
 
-			const users = await this.listUserUseCase.execute(email);
-
-			return NextResponse.json(users, { status: 201 });
+			return NextResponse.json(employees, { status: 201 });
 		} catch (error) {
 			console.log(error);
 			return NextResponse.json(

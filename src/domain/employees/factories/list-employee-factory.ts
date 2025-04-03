@@ -1,11 +1,9 @@
-import { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
-import { ListUserUseCase } from "../use-cases/list-employee-use-case";
-import { ListUserController } from "../controller/list-employee-controller";
+import { EmployeeRepository } from "@/domain/repositories/implementation/employee-prisma-implementation";
+import { ListEmployeeUseCase } from "../use-cases/list-employee-use-case";
+import { ListEmployeeController } from "../controller/list-employee-controller";
 
-const usersRepository = new UsersRepository();
+const employeeRepository = new EmployeeRepository();
+const listEmployeeUseCase = new ListEmployeeUseCase(employeeRepository);
+const listEmployeeController = new ListEmployeeController(listEmployeeUseCase);
 
-const listUserUseCase = new ListUserUseCase(usersRepository);
-
-const listUserController = new ListUserController(listUserUseCase);
-
-export { listUserController };
+export { listEmployeeController };

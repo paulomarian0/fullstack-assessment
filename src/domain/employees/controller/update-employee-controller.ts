@@ -1,15 +1,20 @@
-import type { UpdateUserUseCase } from "../use-cases/update-employee-use-case";
+import type { UpdateEmployeeUseCase } from "../use-cases/update-employee-use-case";
 import { type NextRequest, NextResponse } from "next/server";
 
-export class UpdateUserController {
-	constructor(private readonly updateUserUseCase: UpdateUserUseCase) {}
+export class UpdateEmployeeController {
+	constructor(private readonly updateEmployeeUseCase: UpdateEmployeeUseCase) {}
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
 			const id = request.nextUrl.pathname.split("/").pop() as string;
-			const { name } = await request.json();
+			const { address, phone, status } = await request.json();
 
-			const user = await this.updateUserUseCase.execute({ id, name });
+			const user = await this.updateEmployeeUseCase.execute({
+				id,
+				address,
+				phone,
+				status,
+			});
 
 			return NextResponse.json(user, { status: 201 });
 		} catch (error) {

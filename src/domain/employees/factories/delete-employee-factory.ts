@@ -1,11 +1,11 @@
-import { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
-import { DeleteUserUseCase } from "../use-cases/delete-employee-use-case";
-import { DeleteUserController } from "../controller/delete-employee-controller";
+import { EmployeeRepository } from "@/domain/repositories/implementation/employee-prisma-implementation";
+import { DeleteEmployeeUseCase } from "../use-cases/delete-employee-use-case";
+import { DeleteEmployeeController } from "../controller/delete-employee-controller";
 
-const userRepository = new UsersRepository();
+const employeeRepository = new EmployeeRepository();
+const deleteEmployeeUseCase = new DeleteEmployeeUseCase(employeeRepository);
+const deleteEmployeeController = new DeleteEmployeeController(
+	deleteEmployeeUseCase,
+);
 
-const deleteUserUseCase = new DeleteUserUseCase(userRepository);
-
-const deleteUserController = new DeleteUserController(deleteUserUseCase);
-
-export { deleteUserController };
+export { deleteEmployeeController };

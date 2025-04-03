@@ -1,13 +1,9 @@
-import type { IUserRepository } from "@/domain/repositories/employee-repository";
+import type { IEmployeeRepository } from "@/domain/repositories/employee-repository";
 
-export class FindUserUseCase {
-	constructor(private readonly userRepository: IUserRepository) {}
+export class FindEmployeeUseCase {
+	constructor(private readonly employeeRepository: IEmployeeRepository) {}
 
-	async execute({
-		id,
-		name,
-		email,
-	}: { id?: string; name?: string; email?: string }) {
-		return this.userRepository.find({ id, name, email });
+	async execute({ id }: { id?: string }) {
+		return this.employeeRepository.find({ id });
 	}
 }

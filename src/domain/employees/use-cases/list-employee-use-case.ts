@@ -1,10 +1,10 @@
-import type { IUserRepository } from "@/domain/repositories/employee-repository";
-import type { User } from "../Employee";
+import type { IEmployeeRepository } from "@/domain/repositories/employee-repository";
+import type { Employee } from "../Employee";
 
-export class ListUserUseCase {
-	constructor(private readonly userRepository: IUserRepository) {}
+export class ListEmployeeUseCase {
+	constructor(private readonly employeeRepository: IEmployeeRepository) {}
 
-	async execute(email: string): Promise<User[]> {
-		return this.userRepository.list(email);
+	async execute(): Promise<Employee[]> {
+		return this.employeeRepository.list();
 	}
 }
