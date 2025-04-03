@@ -1,15 +1,18 @@
 import { type NextRequest, NextResponse } from "next/server";
-import type { CreateUserUseCase } from "../use-cases/create-history-use-case";
+import type { CreateHistoryUseCase } from "../use-cases/create-history-use-case";
 
-export class CreateUserController {
-	constructor(private readonly createUserUseCase: CreateUserUseCase) {}
+export class CreateHistoryController {
+	constructor(private readonly createHistoryUseCase: CreateHistoryUseCase) {}
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
-			const { id, name, email } = await request.json();
-			const user = await this.createUserUseCase.execute({ id, name, email });
+			const { employeeId, departmentId } = await request.json();
+			const history = await this.createHistoryUseCase.execute({
+				employeeId,
+				departmentId,
+			});
 
-			return NextResponse.json(user, { status: 201 });
+			return NextResponse.json(history, { status: 201 });
 		} catch (error) {
 			return NextResponse.json(
 				{ message: error.message || "Unexpected error." },
