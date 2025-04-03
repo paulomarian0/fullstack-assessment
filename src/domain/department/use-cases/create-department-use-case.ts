@@ -4,7 +4,7 @@ import type { Department } from "../Department";
 export class CreateDepartmentUseCase {
 	constructor(private readonly departmentRepository: DepartmentRepository) {}
 
-	async execute(user: Department): Promise<Department> {
-		return this.departmentRepository.create(user);
+	async execute(department: string): Promise<Department> {
+		return this.departmentRepository.create(department);
 	}
 }

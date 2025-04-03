@@ -6,11 +6,9 @@ export class ListDepartmentController {
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
-			const { email } = Object.fromEntries(request.nextUrl.searchParams);
+			const departments = await this.listDepartmentUseCase.execute();
 
-			const users = await this.listDepartmentUseCase.execute(email);
-
-			return NextResponse.json(users, { status: 201 });
+			return NextResponse.json(departments, { status: 201 });
 		} catch (error) {
 			console.log(error);
 			return NextResponse.json(

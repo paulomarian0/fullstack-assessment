@@ -8,12 +8,8 @@ export class CreateDepartmentController {
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
-			const { id, name, email } = await request.json();
-			const department = await this.createDepartmentUseCase.execute({
-				id,
-				name,
-				email,
-			});
+			const { name } = await request.json();
+			const department = await this.createDepartmentUseCase.execute(name);
 
 			return NextResponse.json(department, { status: 201 });
 		} catch (error) {

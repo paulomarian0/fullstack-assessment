@@ -6,13 +6,10 @@ export class FindDepartmentController {
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
-			const { id, email, name } = Object.fromEntries(
-				request.nextUrl.searchParams,
-			);
+			const { id, name } = Object.fromEntries(request.nextUrl.searchParams);
 			const users = await this.findDepartmentUseCase.execute({
 				id,
 				name,
-				email,
 			});
 
 			return NextResponse.json(users, { status: 201 });

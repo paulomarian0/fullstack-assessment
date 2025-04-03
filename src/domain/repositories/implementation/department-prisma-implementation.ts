@@ -9,56 +9,35 @@ export class DepartmentRepository implements IDepartmentRepository {
 		this.repository = databaseAdapter;
 	}
 
-	async create(user: Department) {
+	async create(name: string) {
 		return this.repository.department.create({
 			data: {
-				email: user.email,
-				name: user.name,
+				name,
 			},
 		});
 	}
 
-	async list(email: string) {
-		const users = await this.repository.department.findMany({
-			where: {
-				email: email ? { contains: email } : undefined,
-				deletedAt: null,
-			},
-		});
-
-		return users;
+	async list() {
+		return await this.repository.department.findMany({});
 	}
 
-	async find({
-		id,
-		name,
-		email,
-	}: { id?: string; name?: string; email?: string }) {
-		const user = await this.repository.department.findFirst({
+	async find({ id, name }: { id?: string; name?: string }) {
+		return await this.repository.department.findFirst({
 			where: {
 				id,
 				name,
-				email,
-				deletedAt: null,
 			},
 		});
-
-		return user;
 	}
 
 	async delete({ id }: { id: string }) {
-		return this.repository.department.update({
-			where: {
-				id,
-			},
-			data: {
-				deletedAt: new Date(),
-			},
+		await this.repository.department.delete({
+			where: { id },
 		});
 	}
 
 	async update({ id, name }: { id: string; name: string }) {
-		return this.repository.department.update({
+		await this.repository.department.update({
 			where: {
 				id,
 			},

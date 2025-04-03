@@ -4,7 +4,7 @@ import type { IDepartmentRepository } from "@/domain/repositories/department-rep
 export class ListDepartmentUseCase {
 	constructor(private readonly departmentRepository: IDepartmentRepository) {}
 
-	async execute(email: string): Promise<Department[]> {
-		return this.departmentRepository.list(email);
+	async execute(): Promise<Department[]> {
+		return this.departmentRepository.list();
 	}
 }

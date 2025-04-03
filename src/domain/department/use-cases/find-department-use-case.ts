@@ -3,11 +3,7 @@ import type { IDepartmentRepository } from "@/domain/repositories/department-rep
 export class FindDepartmentUseCase {
 	constructor(private readonly departmentRepository: IDepartmentRepository) {}
 
-	async execute({
-		id,
-		name,
-		email,
-	}: { id?: string; name?: string; email?: string }) {
-		return this.departmentRepository.find({ id, name, email });
+	async execute({ id, name }: { id?: string; name?: string }) {
+		return this.departmentRepository.find({ id, name });
 	}
 }
