@@ -1,13 +1,13 @@
-import type { User } from "../employees/Employee";
+import type { Employee } from "../employees/Employee";
 
-export interface IUserRepository {
-	create(user: User): Promise<User>;
-	list(email: string): Promise<User[]>;
+export interface IEmployeeRepository {
+	create(employee: Employee): Promise<Employee>;
+	list(email: string): Promise<Employee[]>;
 	find({
 		id,
 		name,
 		email,
-	}: { id?: string; email?: string; name?: string }): Promise<User | null>;
-	delete({ id }: { id: string }): Promise<User>;
-	update({ id, name }: { id: string; name: string }): Promise<User>;
+	}: { id?: string; email?: string; name?: string }): Promise<Employee | null>;
+	delete({ id }: { id: string }): Promise<Employee>;
+	update({ id, name }: { id: string; name: string }): Promise<Employee>;
 }

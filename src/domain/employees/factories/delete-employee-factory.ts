@@ -1,4 +1,4 @@
-import { UsersRepository } from "@/domain/repositories/implementation/users-prisma-implementation";
+import { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
 import { DeleteUserUseCase } from "../use-cases/delete-employee-use-case";
 import { DeleteUserController } from "../controller/delete-employee-controller";
 

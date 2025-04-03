@@ -1,10 +1,10 @@
-import type { UsersRepository } from "@/domain/repositories/implementation/users-prisma-implementation";
-import type { User } from "../Department";
+import type { DepartmentRepository } from "@/domain/repositories/implementation/department-prisma-implementation";
+import type { Department } from "../Department";
 
-export class CreateUserUseCase {
-	constructor(private readonly userRepository: UsersRepository) {}
+export class CreateDepartmentUseCase {
+	constructor(private readonly departmentRepository: DepartmentRepository) {}
 
-	async execute(user: User): Promise<User> {
-		return this.userRepository.create(user);
+	async execute(user: Department): Promise<Department> {
+		return this.departmentRepository.create(user);
 	}
 }

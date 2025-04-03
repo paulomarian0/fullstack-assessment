@@ -1,15 +1,21 @@
 import { type NextRequest, NextResponse } from "next/server";
-import type { CreateUserUseCase } from "../use-cases/create-department-use-case";
+import type { CreateDepartmentUseCase } from "../use-cases/create-department-use-case";
 
-export class CreateUserController {
-	constructor(private readonly createUserUseCase: CreateUserUseCase) {}
+export class CreateDepartmentController {
+	constructor(
+		private readonly createDepartmentUseCase: CreateDepartmentUseCase,
+	) {}
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
 			const { id, name, email } = await request.json();
-			const user = await this.createUserUseCase.execute({ id, name, email });
+			const department = await this.createDepartmentUseCase.execute({
+				id,
+				name,
+				email,
+			});
 
-			return NextResponse.json(user, { status: 201 });
+			return NextResponse.json(department, { status: 201 });
 		} catch (error) {
 			return NextResponse.json(
 				{ message: error.message || "Unexpected error." },

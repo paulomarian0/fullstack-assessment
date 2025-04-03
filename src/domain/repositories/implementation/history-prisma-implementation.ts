@@ -1,16 +1,16 @@
-import type { IUserRepository } from "../employee-repository";
-import type { User } from "@/domain/employees/Employee";
 import { databaseAdapter } from "@/domain/helpers/databaseAdapter";
+import type { IHistoryRepository } from "../history-repository";
+import type { History } from "@/domain/history/History";
 
-export class UsersRepository implements IUserRepository {
+export class HistoryRepository implements IHistoryRepository {
 	private repository: typeof databaseAdapter;
 
 	constructor() {
 		this.repository = databaseAdapter;
 	}
 
-	async create(user: User) {
-		return this.repository.user.create({
+	async create(user: History) {
+		return this.repository.history.create({
 			data: {
 				email: user.email,
 				name: user.name,
@@ -19,7 +19,7 @@ export class UsersRepository implements IUserRepository {
 	}
 
 	async list(email: string) {
-		const users = await this.repository.user.findMany({
+		const users = await this.repository.history.findMany({
 			where: {
 				email: email ? { contains: email } : undefined,
 				deletedAt: null,
@@ -34,7 +34,7 @@ export class UsersRepository implements IUserRepository {
 		name,
 		email,
 	}: { id?: string; name?: string; email?: string }) {
-		const user = await this.repository.user.findFirst({
+		const user = await this.repository.history.findFirst({
 			where: {
 				id,
 				name,
@@ -47,7 +47,7 @@ export class UsersRepository implements IUserRepository {
 	}
 
 	async delete({ id }: { id: string }) {
-		return this.repository.user.update({
+		return this.repository.history.update({
 			where: {
 				id,
 			},
@@ -58,7 +58,7 @@ export class UsersRepository implements IUserRepository {
 	}
 
 	async update({ id, name }: { id: string; name: string }) {
-		return this.repository.user.update({
+		return this.repository.history.update({
 			where: {
 				id,
 			},

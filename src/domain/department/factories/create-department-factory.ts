@@ -1,9 +1,13 @@
-import { UsersRepository } from "@/domain/repositories/implementation/users-prisma-implementation";
-import { CreateUserUseCase } from "../use-cases/create-department-use-case";
-import { CreateUserController } from "../controller/create-department-controller";
+import { DepartmentRepository } from "@/domain/repositories/implementation/department-prisma-implementation";
+import { CreateDepartmentUseCase } from "../use-cases/create-department-use-case";
+import { CreateDepartmentController } from "../controller/create-department-controller";
 
-const usersRepository = new UsersRepository();
-const createUserUseCase = new CreateUserUseCase(usersRepository);
-const createUserController = new CreateUserController(createUserUseCase);
+const departmentRepository = new DepartmentRepository();
+const createDepartmentUseCase = new CreateDepartmentUseCase(
+	departmentRepository,
+);
+const createDepartmentController = new CreateDepartmentController(
+	createDepartmentUseCase,
+);
 
-export { createUserController };
+export { createDepartmentController };

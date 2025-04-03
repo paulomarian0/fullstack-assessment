@@ -1,21 +1,13 @@
-export class Employee {
+export class History {
 	constructor(
-		public readonly id: string,
-		public readonly firstName: string,
-		public readonly lastName: string,
-		public readonly hireDate: Date,
-		public readonly phone: string,
-		public readonly address: string,
-		public readonly status: boolean,
-		public readonly departmentId: string,
+		public id: string,
+		public employeeId: string,
+		public departmentId: string,
+		public changedAt: Date,
 	) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.hireDate = hireDate;
-		this.phone = phone;
-		this.address = address;
-		this.status = status;
+		this.employeeId = employeeId;
 		this.departmentId = departmentId;
+		this.changedAt = changedAt;
 	}
 }

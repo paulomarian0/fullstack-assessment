@@ -1,9 +1,9 @@
-import type { IUserRepository } from "@/domain/repositories/employee-repository";
+import type { IDepartmentRepository } from "@/domain/repositories/department-repository";
 
-export class UpdateUserUseCase {
-	constructor(private readonly userRepository: IUserRepository) {}
+export class UpdateDepartmentUseCase {
+	constructor(private readonly departmentRepository: IDepartmentRepository) {}
 
 	async execute({ id, name }: { id: string; name: string }) {
-		return this.userRepository.update({ id, name });
+		return this.departmentRepository.update({ id, name });
 	}
 }

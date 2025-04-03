@@ -1,13 +1,13 @@
-import type { IUserRepository } from "@/domain/repositories/employee-repository";
+import type { IDepartmentRepository } from "@/domain/repositories/department-repository";
 
-export class FindUserUseCase {
-	constructor(private readonly userRepository: IUserRepository) {}
+export class FindDepartmentUseCase {
+	constructor(private readonly departmentRepository: IDepartmentRepository) {}
 
 	async execute({
 		id,
 		name,
 		email,
 	}: { id?: string; name?: string; email?: string }) {
-		return this.userRepository.find({ id, name, email });
+		return this.departmentRepository.find({ id, name, email });
 	}
 }

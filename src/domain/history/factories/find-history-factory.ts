@@ -1,4 +1,4 @@
-import { UsersRepository } from "@/domain/repositories/implementation/users-prisma-implementation";
+import { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
 import { FindUserUseCase } from "../use-cases/find-history-use-case";
 import { FindUserController } from "../controller/find-history-controller";
 

@@ -1,4 +1,4 @@
-import type { UsersRepository } from "@/domain/repositories/implementation/users-prisma-implementation";
+import type { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
 import type { User } from "../Employee";
 
 export class CreateUserUseCase {

@@ -1,13 +1,15 @@
-import type { DeleteUserUseCase } from "../use-cases/delete-department-use-case";
+import type { DeleteDepartmentUseCase } from "../use-cases/delete-department-use-case";
 import { type NextRequest, NextResponse } from "next/server";
 
-export class DeleteUserController {
-	constructor(private readonly deleteUserUseCase: DeleteUserUseCase) {}
+export class DeleteDepartmentController {
+	constructor(
+		private readonly deleteDepartmentUseCase: DeleteDepartmentUseCase,
+	) {}
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
 			const id = request.nextUrl.pathname.split("/").pop();
-			await this.deleteUserUseCase.execute({ id } as { id: string });
+			await this.deleteDepartmentUseCase.execute({ id } as { id: string });
 
 			return NextResponse.json(
 				{ message: "User deleted successfully" },

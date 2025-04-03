@@ -1,4 +1,4 @@
-import { UsersRepository } from "@/domain/repositories/implementation/users-prisma-implementation";
+import { UsersRepository } from "@/domain/repositories/implementation/history-prisma-implementation";
 import { UpdateUserUseCase } from "../use-cases/update-employee-use-case";
 import { UpdateUserController } from "../controller/update-employee-controller";
 
