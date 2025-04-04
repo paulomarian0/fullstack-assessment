@@ -32,7 +32,11 @@ export class EmployeeRepository implements IEmployeeRepository {
 	}
 
 	async list() {
-		const departments = await this.repository.employee.findMany({});
+		const departments = await this.repository.employee.findMany({
+			include: {
+				department: true,
+			},
+		});
 
 		return departments;
 	}
