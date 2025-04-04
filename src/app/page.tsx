@@ -27,6 +27,7 @@ export default function Home() {
 			<div className="space-y-4">
 				{employees.map((employee: IEmployee) => (
 					<EmployeeCard
+						id={employee.id}
 						key={employee.id}
 						department={employee?.department?.name}
 						employeeName={`${employee.firstName} ${employee.lastName}`}

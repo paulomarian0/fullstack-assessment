@@ -12,7 +12,6 @@ import {
 	Dialog,
 	DialogContent,
 	DialogHeader,
-	DialogDescription,
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
@@ -89,9 +88,6 @@ export const EmployeeHeader = () => {
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>Add New Employee</DialogTitle>
-					<DialogDescription>
-						Fill out the form to add a new employee to the system.
-					</DialogDescription>
 				</DialogHeader>
 				<form action={handleSubmit} className="space-y-4">
 					<div className="grid grid-cols-2 gap-4">
