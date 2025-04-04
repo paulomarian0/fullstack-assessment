@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npx prisma generate",
+    "build": "next build",
+    "postbuild": "prisma generate",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "npm run build && npm run postbuild"
   },
   "dependencies": {
     "@prisma/client": "^6.5.0",
