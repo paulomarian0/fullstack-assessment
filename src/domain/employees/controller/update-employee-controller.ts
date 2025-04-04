@@ -7,16 +7,20 @@ export class UpdateEmployeeController {
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
 			const id = request.nextUrl.pathname.split("/").pop() as string;
-			const { address, phone, status } = await request.json();
+			const { departmentId, status } = await request.json();
 
-			const user = await this.updateEmployeeUseCase.execute({
+			await this.updateEmployeeUseCase.execute({
 				id,
-				address,
-				phone,
+				departmentId,
 				status,
 			});
 
-			return NextResponse.json(user, { status: 201 });
+			return NextResponse.json(
+				{
+					message: "Employee updated successfully.",
+				},
+				{ status: 200 },
+			);
 		} catch (error) {
 			console.log(error);
 			return NextResponse.json(

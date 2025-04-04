@@ -14,7 +14,16 @@ export class HistoryRepository implements IHistoryRepository {
 			data: {
 				employeeId,
 				departmentId,
+				changedAt: new Date(),
 			},
+		});
+	}
+
+	async list(employeeId: string) {
+		return await this.repository.history.findMany({
+			where: { employeeId },
+			include: { department: true },
+			orderBy: { changedAt: "desc" },
 		});
 	}
 }

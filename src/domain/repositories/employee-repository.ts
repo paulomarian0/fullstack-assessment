@@ -23,13 +23,11 @@ export interface IEmployeeRepository {
 	delete({ id }: { id: string }): Promise<void>;
 	update({
 		id,
-		phone,
-		address,
+		departmentId,
 		status,
 	}: {
 		id: string;
-		phone: string;
-		address: string;
-		status: boolean;
+		departmentId?: string;
+		status?: boolean;
 	}): Promise<void>;
 }

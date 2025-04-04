@@ -64,17 +64,15 @@ export class EmployeeRepository implements IEmployeeRepository {
 
 	async update({
 		id,
-		phone,
-		address,
+		departmentId,
 		status,
-	}: { id: string; phone: string; address: string; status: boolean }) {
+	}: { id: string; departmentId: string; status: boolean }) {
 		await this.repository.employee.update({
 			where: {
 				id,
 			},
 			data: {
-				phone,
-				address,
+				departmentId,
 				status,
 			},
 		});
