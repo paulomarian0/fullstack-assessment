@@ -19,11 +19,7 @@ export interface IEmployeeRepository {
 		departmentId: string;
 	}>;
 	list(): Promise<Employee[]>;
-	find({
-		id,
-		name,
-		email,
-	}: { id?: string; email?: string; name?: string }): Promise<Employee | null>;
+	find({ id }: { id?: string }): Promise<Employee | null>;
 	delete({ id }: { id: string }): Promise<void>;
 	update({
 		id,

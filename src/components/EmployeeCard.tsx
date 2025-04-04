@@ -10,6 +10,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { deleteEmployee } from "@/services/delete-employee";
+import Link from "next/link";
 interface IEmployeeCard {
 	id: string;
 	employeeName: string;
@@ -40,9 +41,11 @@ export const EmployeeCard = ({
 				</div>
 			</div>
 			<form className="flex items-center gap-4">
-				<Button className="bg-green-600 hover:bg-green-400">
-					View Details
-				</Button>
+				<Link href={`/employees/${id}`}>
+					<Button className="bg-green-600 hover:bg-green-400">
+						View Details
+					</Button>
+				</Link>
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button className="text-red-600 bg-inherit hover:bg-red-100">

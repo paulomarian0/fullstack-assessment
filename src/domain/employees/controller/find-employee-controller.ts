@@ -6,7 +6,7 @@ export class FindEmployeeController {
 
 	async handle(request: NextRequest): Promise<NextResponse> {
 		try {
-			const { id } = Object.fromEntries(request.nextUrl.searchParams);
+			const id = request.nextUrl.pathname.split("/").pop();
 			const users = await this.findEmployeeUseCase.execute({ id });
 
 			return NextResponse.json(users, { status: 201 });

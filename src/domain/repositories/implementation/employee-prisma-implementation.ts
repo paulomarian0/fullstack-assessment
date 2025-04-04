@@ -46,6 +46,9 @@ export class EmployeeRepository implements IEmployeeRepository {
 			where: {
 				id,
 			},
+			include: {
+				department: true,
+			},
 		});
 
 		return user;
