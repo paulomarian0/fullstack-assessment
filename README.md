@@ -1,7 +1,3 @@
-Sure! Here's the updated version of the README in English with the additional section explaining how to run the project:
-
----
-
 # Fullstack Assessment - Software Mind
 
 ## Introduction
