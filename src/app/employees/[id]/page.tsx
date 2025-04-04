@@ -14,10 +14,11 @@ import { getDepartments } from "@/services/get-departments";
 import { handleUpdateEmployee } from "@/actions/update-employee";
 import { HistoryTable } from "@/components/HistoryTable";
 
-export default async function EmployeePage({
-	params,
-}: { params: { id: string } }) {
-	const employeeId = await params.id;
+type Params = Promise<{ id: string }>;
+
+export default async function EmployeePage({ params }: { params: Params }) {
+	const { id } = await params;
+	const employeeId = id;
 	const employee = await getEmployeeById(employeeId);
 	const departments = await getDepartments();
 
