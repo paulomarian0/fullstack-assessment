@@ -11,9 +11,8 @@ export class FindEmployeeController {
 
 			return NextResponse.json(users, { status: 201 });
 		} catch (error) {
-			console.log(error);
 			return NextResponse.json(
-				{ message: error.message || "Unexpected error." },
+				{ message: error || "Unexpected error." },
 				{ status: 400 },
 			);
 		}

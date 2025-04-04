@@ -10,9 +10,8 @@ export class ListEmployeeController {
 
 			return NextResponse.json(employees, { status: 201 });
 		} catch (error) {
-			console.log(error);
 			return NextResponse.json(
-				{ message: error.message || "Unexpected error." },
+				{ message: error || "Unexpected error." },
 				{ status: 400 },
 			);
 		}

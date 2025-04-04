@@ -12,7 +12,7 @@ export class ListHistoryController {
 			return NextResponse.json(history, { status: 201 });
 		} catch (error) {
 			return NextResponse.json(
-				{ message: error.message || "Unexpected error." },
+				{ message: error || "Unexpected error." },
 				{ status: 400 },
 			);
 		}
