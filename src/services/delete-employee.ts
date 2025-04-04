@@ -1,4 +1,4 @@
-export async function deleteEmployee(employeeId: string) {
+export async function deleteEmployee(employeeId: string): Promise<void> {
 	try {
 		const response = await fetch(
 			`${process.env.NEXT_PUBLIC_API_URL}/api/employees/${employeeId}`,

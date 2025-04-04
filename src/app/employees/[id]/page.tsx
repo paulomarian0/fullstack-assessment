@@ -12,7 +12,8 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { getDepartments } from "@/services/get-departments";
-import { getHistoryByEmployeeId } from "@/services/get-history";
+import { handleUpdateEmployee } from "@/actions/update-employee";
+import { HistoryTable } from "@/components/HistoryTable";
 
 export default function EmployeePage({ params }: { params: { id: string } }) {
 	const employeeId = params.id;
@@ -20,59 +21,24 @@ export default function EmployeePage({ params }: { params: { id: string } }) {
 	const employee = use(getEmployeeByIdPromise);
 	const departmentsPromise = getDepartments();
 	const departments = use(departmentsPromise);
-	const historyPromise = getHistoryByEmployeeId(employeeId);
-	const history = use(historyPromise);
 
 	const { years, months, days } = calculateDuration(employee.hireDate);
 
 	const handleUpdateDepartment = async (formData: FormData) => {
 		"use server";
-
 		const departmentId = formData.get("departmentId") as string;
+		const updateData = { departmentId };
 
-		const res = await fetch(
-			`http://localhost:3000/api/employees/${employeeId}`,
-			{
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					departmentId,
-				}),
-			},
-		);
-
-		if (!res.ok) {
-			throw new Error("Failed to update department");
-		}
-
-		return await res.json();
+		return await handleUpdateEmployee(employeeId, updateData);
 	};
 
 	const handleUpdateStatus = async () => {
 		"use server";
-		const res = await fetch(
-			`http://localhost:3000/api/employees/${employeeId}`,
-			{
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					status: !employee.status,
-				}),
-			},
-		);
 
-		if (!res.ok) {
-			throw new Error("Failed to update status");
-		}
+		const updateData = { status: !employee.status };
 
-		return await res.json();
+		return await handleUpdateEmployee(employeeId, updateData);
 	};
-
-	console.log(history);
 
 	return (
 		<div className="p-6 max-w-4xl mx-auto">
@@ -162,32 +128,7 @@ export default function EmployeePage({ params }: { params: { id: string } }) {
 					</Button>
 				</div>
 			</div>
-			<table className="w-full mt-6 border-collapse border border-gray-300">
-				<thead>
-					<tr>
-						<th className="border border-gray-300 p-2">Date</th>
-						<th className="border border-gray-300 p-2">Department</th>
-					</tr>
-				</thead>
-				<tbody>
-					{history.map(
-						({
-							id,
-							departmentId,
-							changedAt,
-						}: { id: string; departmentId: string; changedAt: Date }) => (
-							<tr key={id}>
-								<td className="border border-gray-300 p-2">
-									{dayjs(changedAt).format("MMM D, YYYY HH:mm:ss")}
-								</td>
-								<td className="border border-gray-300 p-2">
-									{departments.find((dept) => dept.id === departmentId)?.name}
-								</td>
-							</tr>
-						),
-					)}
-				</tbody>
-			</table>
+			<HistoryTable id={employeeId} />
 		</div>
 	);
 }

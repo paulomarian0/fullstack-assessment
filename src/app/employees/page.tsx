@@ -3,16 +3,6 @@ import { EmployeeHeader } from "@/components/EmployeeHeader";
 import { getEmployees } from "@/services/get-employees";
 import { use } from "react";
 
-interface IEmployee {
-	id: string;
-	firstName: string;
-	lastName: string;
-	hireDate: string;
-	department: {
-		name: string;
-	};
-}
-
 export default function Home() {
 	const employeesPromise = getEmployees();
 	const employees = use(employeesPromise);
@@ -22,13 +12,13 @@ export default function Home() {
 			<EmployeeHeader />
 
 			<div className="space-y-4">
-				{employees.map((employee: IEmployee) => (
+				{employees.map(({ id, department, firstName, lastName, hireDate }) => (
 					<EmployeeCard
-						id={employee.id}
-						key={employee.id}
-						department={employee?.department?.name}
-						employeeName={`${employee.firstName} ${employee.lastName}`}
-						hireDate={employee.hireDate}
+						id={id}
+						key={id}
+						department={department?.name}
+						employeeName={`${firstName} ${lastName}`}
+						hireDate={hireDate}
 					/>
 				))}
 			</div>
