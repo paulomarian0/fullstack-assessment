@@ -16,7 +16,6 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { getDepartments } from "@/services/get-departments";
-import { use } from "react";
 import { createEmployee } from "@/actions/create-employee";
 
 interface IEmployeeFormData {
@@ -29,9 +28,8 @@ interface IEmployeeFormData {
 	avatarUrl?: string;
 }
 
-export const EmployeeHeader = () => {
-	const departmentsPromise = getDepartments();
-	const departments = use(departmentsPromise);
+export const EmployeeHeader = async () => {
+	const departments = await getDepartments();
 
 	const handleSubmit = async (formData: FormData) => {
 		"use server";

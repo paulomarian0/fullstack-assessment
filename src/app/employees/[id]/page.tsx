@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { getEmployeeById } from "@/services/get-employee-by-id";
 import { calculateDuration } from "@/utils/calculateDuration";
 import { Label } from "@radix-ui/react-label";
-import { use } from "react";
 import dayjs from "dayjs";
 import {
 	Select,
@@ -15,12 +14,12 @@ import { getDepartments } from "@/services/get-departments";
 import { handleUpdateEmployee } from "@/actions/update-employee";
 import { HistoryTable } from "@/components/HistoryTable";
 
-export default function EmployeePage({ params }: { params: { id: string } }) {
-	const employeeId = params.id;
-	const getEmployeeByIdPromise = getEmployeeById(employeeId);
-	const employee = use(getEmployeeByIdPromise);
-	const departmentsPromise = getDepartments();
-	const departments = use(departmentsPromise);
+export default async function EmployeePage({
+	params,
+}: { params: { id: string } }) {
+	const employeeId = await params.id;
+	const employee = await getEmployeeById(employeeId);
+	const departments = await getDepartments();
 
 	const { years, months, days } = calculateDuration(employee.hireDate);
 
